@@ -17,17 +17,27 @@
                 </tr>
 
                 <tr>
-                    <td><input type="number"></td>
+                    <td><input id="day" type="number"></td>
                     <td>/</td>
-                    <td><input type="number"></td>
+                    <td><input id="month" type="number"></td>
                     <td>/</td>
-                    <td><input type="number"></td>
+                    <td><input id="year" type="number"></td>
                 </tr>
                 </table>
                 <hr>
-                <input type="button" value="Submit">
+                <div id="blankDOB" style="color:red;"></div>
+                <div id="invalidDOB" style="color:red;"></div>
+                <input id="btn" type="button" value="Submit">
         </fieldset>
+
+            <br>
+            <br>
+            <div id="output"></div>
+
         </form>
+
+        <script src="DOB.js"></script>
+
     </body>
 </html>
 

@@ -6,6 +6,7 @@
         <form>
             <label for="bloodGroup">Blood Group</label>
             <select id="bloodGroup" name="bloodGroup">
+                <option value="">Select Blood Group</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -16,7 +17,13 @@
                 <option value="AB-">AB-</option>
             </select>
             <hr>
-            <input type="button" value="Submit">
+            <div id="blankBlood" style="color:red;"></div>
+            <input id="btn" type="button" value="Submit">
+            <br>
+            <br>
+            <div id="output"></div>
         </form>
+
+        <script src="Blood.js"></script>
     </body>
 </html>

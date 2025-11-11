@@ -28,7 +28,7 @@ function Name() {
     hasError = true;
   }
 
-  if (!hasError) {
-    window.location.href = "Email.html";
+  else {
+    document.getElementById('output').innerHTML = "Name entered: " + name;
   }
 }
