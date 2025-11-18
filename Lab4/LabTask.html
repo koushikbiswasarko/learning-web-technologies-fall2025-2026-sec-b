@@ -116,7 +116,6 @@
 </body>
 
 <script>
-    
     document.getElementById("Username").hidden = true;
     document.getElementById("Email").hidden = true;
     document.getElementById("Gender").hidden = true;
@@ -150,122 +149,177 @@
     document.getElementById('submit').addEventListener('click', Error);
 
     function Error() {
-    let name = document.getElementById("name").value.trim();
-    let blankName = document.getElementById("blankName");
-    let lengthName = document.getElementById("lengthName");
-    let startName = document.getElementById("startName");
 
-    blankName.innerHTML = "";
-    lengthName.innerHTML = "";
-    startName.innerHTML = "";
+        document.getElementById('outputName').innerHTML = "";
+        document.getElementById('outputEmail').innerHTML = "";
+        document.getElementById('outputGender').innerHTML = "";
+        document.getElementById('outputDOB').innerHTML = "";
+        document.getElementById('outputBlood').innerHTML = "";
+        document.getElementById('outputDegree').innerHTML = "";
 
-    let firstChar = name.charCodeAt(0);
-    let namehasError = false;
-    let emailhasError = false;
-    let genderhasError = false;
-    let dobhasError = false;
-    let bloodhasError = false;
-    let degreehasError = false;
+        document.getElementById("blankName").innerHTML = "";
+        document.getElementById("lengthName").innerHTML = "";
+        document.getElementById("startName").innerHTML = "";
+        document.getElementById("blankEmail").innerHTML = "";
+        document.getElementById("invalidEmail").innerHTML = "";
+        document.getElementById("blankGender").innerHTML = "";
+        document.getElementById("blankDOB").innerHTML = "";
+        document.getElementById("invalidDOB").innerHTML = "";
+        document.getElementById("blankBlood").innerHTML = "";
+        document.getElementById("blankDegree").innerHTML = "";
 
-    if (name === "") {
-        blankName.innerHTML = "Cannot be empty";
-        namehasError = true;
-    }
+        let anyError = false;
 
-    if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
-        startName.innerHTML = "Must start with a letter";
-        namehasError = true;
-    }
-
-    let email = document.getElementById("email").value.trim();
-    let emailType = document.getElementById("email");
-    let blankEmail = document.getElementById("blankEmail");
-    let invalidEmail = document.getElementById("invalidEmail");
-
-    blankEmail.innerHTML = "";
-    invalidEmail.innerHTML = "";
-
-    if (email === "") {
-        blankEmail.innerHTML = "Cannot be empty";
-        emailhasError = true;
-    }
-
-    if (!emailType.checkValidity()) {
-        invalidEmail.innerHTML = "Must be a valid email address (i.e anything@example.com)";
-        emailhasError = true;
-    }
-
-        let gender = document.querySelector('input[name="gender"]:checked');
-        let blankGender = document.getElementById("blankGender");
-
-        blankGender.innerHTML = "";
-
-        if (!gender) {
-            blankGender.innerHTML = "At least one of them has to be selected";
-            genderhasError = true;
-        }
-
-        let day = document.getElementById("day").value.trim();
-        let month = document.getElementById("month").value.trim();
-        let year = document.getElementById("year").value.trim();
-        let blankDOB = document.getElementById("blankDOB");
-        let invalidDOB = document.getElementById("invalidDOB");
-
-        blankDOB.innerHTML = "";
-        invalidDOB.innerHTML = "";
-
-        if (day === "" || month === "" || year === "") {
-            blankDOB.innerHTML = "Cannot be empty";
-            dobhasError = true;
-        }
-
-        if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2016)) {
-            invalidDOB.innerHTML = "Must be a valid number (dd: 1-31, mm: 1-12, yyyy: 1900-2016)";
-            dobhasError = true;
-        }
-
+        let name = "";
+        let email = "";
+        let gender = null;
+        let day = "";
+        let month = "";
+        let year = "";
         let blood = document.getElementById("bloodGroup");
-        let blankBlood = document.getElementById("blankBlood");
-        blankBlood.innerHTML = "";
+        let selectedDegrees = [];
 
-        if (!blood.value) {
-            blankBlood.innerHTML = "Must be selected";
-            bloodhasError = true;
+        if (!document.getElementById("Username").hidden) {
+            name = document.getElementById("name").value.trim();
+            let blankName = document.getElementById("blankName");
+            let lengthName = document.getElementById("lengthName");
+            let startName = document.getElementById("startName");
+
+            blankName.innerHTML = "";
+            lengthName.innerHTML = "";
+            startName.innerHTML = "";
+
+            let namehasError = false;
+
+            if (name === "") {
+                blankName.innerHTML = "Cannot be empty";
+                namehasError = true;
+            } else {
+                let firstChar = name.charCodeAt(0);
+                if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
+                    startName.innerHTML = "Must start with a letter";
+                    namehasError = true;
+                }
+            }
+
+            if (namehasError) anyError = true;
         }
 
-        let degree = document.querySelectorAll('input[name="degree"]:checked');
-        let blankDegree = document.getElementById("blankDegree");
-        let selectedDegrees = Array.from(degree).map(item => item.value);
+        if (!document.getElementById("Email").hidden) {
+            email = document.getElementById("email").value.trim();
+            let emailType = document.getElementById("email");
+            let blankEmail = document.getElementById("blankEmail");
+            let invalidEmail = document.getElementById("invalidEmail");
 
-        blankDegree.innerHTML = "";
+            blankEmail.innerHTML = "";
+            invalidEmail.innerHTML = "";
 
-        if (selectedDegrees.length === 0) {
-            blankDegree.innerHTML = "At least one of them has to be selected";
-            degreehasError = true;
+            let emailhasError = false;
+
+            if (email === "") {
+                blankEmail.innerHTML = "Cannot be empty";
+                emailhasError = true;
+            } else if (!emailType.checkValidity()) {
+                invalidEmail.innerHTML = "Must be a valid email address (i.e anything@example.com)";
+                emailhasError = true;
+            }
+
+            if (emailhasError) anyError = true;
         }
 
-    if (!namehasError) {
-        document.getElementById('outputName').innerHTML = "Name: " + name;
-    }
-    if (!emailhasError) {
-        document.getElementById('outputEmail').innerHTML = "Email: " + email;
-    }
-    if (!genderhasError) {
-        document.getElementById('outputGender').innerHTML = "Gender: " + gender.value;
-    }
-    if (!dobhasError) {
-        document.getElementById('outputDOB').innerHTML = "Date of Birth: " + day + "/" + month + "/" + year;
-    }
-    if (!bloodhasError) {
-        document.getElementById('outputBlood').innerHTML = "Blood Group: " + blood.value;
-    }
-    if (!degreehasError) {
-        document.getElementById('outputDegree').innerHTML = "Degree: " + selectedDegrees.join(", ");
-    }
+        if (!document.getElementById("Gender").hidden) {
+            gender = document.querySelector('input[name="gender"]:checked');
+            let blankGender = document.getElementById("blankGender");
+            blankGender.innerHTML = "";
 
-}
+            let genderhasError = false;
 
+            if (!gender) {
+                blankGender.innerHTML = "At least one of them has to be selected";
+                genderhasError = true;
+            }
 
+            if (genderhasError) anyError = true;
+        }
+
+        if (!document.getElementById("DOB").hidden) {
+            day = document.getElementById("day").value.trim();
+            month = document.getElementById("month").value.trim();
+            year = document.getElementById("year").value.trim();
+            let blankDOB = document.getElementById("blankDOB");
+            let invalidDOB = document.getElementById("invalidDOB");
+
+            blankDOB.innerHTML = "";
+            invalidDOB.innerHTML = "";
+
+            let dobhasError = false;
+
+            if (day === "" || month === "" || year === "") {
+                blankDOB.innerHTML = "Cannot be empty";
+                dobhasError = true;
+            } else if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2016)) {
+                invalidDOB.innerHTML = "Must be a valid number (dd: 1-31, mm: 1-12, yyyy: 1900-2016)";
+                dobhasError = true;
+            }
+
+            if (dobhasError) anyError = true;
+        }
+
+        if (!document.getElementById("BloodGroup").hidden) {
+            let blankBlood = document.getElementById("blankBlood");
+            blankBlood.innerHTML = "";
+
+            let bloodhasError = false;
+
+            if (!blood.value) {
+                blankBlood.innerHTML = "Must be selected";
+                bloodhasError = true;
+            }
+
+            if (bloodhasError) anyError = true;
+        }
+
+        if (!document.getElementById("Degree").hidden) {
+            let degree = document.querySelectorAll('input[name="degree"]:checked');
+            let blankDegree = document.getElementById("blankDegree");
+            blankDegree.innerHTML = "";
+
+            let degreehasError = false;
+
+            selectedDegrees = [];
+            for (let i = 0; i < degree.length; i++) {
+                selectedDegrees.push(degree[i].value);
+            }
+
+            if (selectedDegrees.length === 0) {
+                blankDegree.innerHTML = "At least one of them has to be selected";
+                degreehasError = true;
+            }
+
+            if (degreehasError) anyError = true;
+        }
+
+        if (!anyError) {
+            if (!document.getElementById("Username").hidden) {
+                document.getElementById('outputName').innerHTML = "Name: " + name;
+            }
+            if (!document.getElementById("Email").hidden) {
+                document.getElementById('outputEmail').innerHTML = "Email: " + email;
+            }
+            if (!document.getElementById("Gender").hidden) {
+                document.getElementById('outputGender').innerHTML = "Gender: " + gender.value;
+            }
+            if (!document.getElementById("DOB").hidden) {
+                document.getElementById('outputDOB').innerHTML = "Date of Birth: " + day + "/" + month + "/" + year;
+            }
+            if (!document.getElementById("BloodGroup").hidden) {
+                document.getElementById('outputBlood').innerHTML = "Blood Group: " + blood.value;
+            }
+            if (!document.getElementById("Degree").hidden) {
+                document.getElementById('outputDegree').innerHTML = "Degree: " + selectedDegrees.join(", ");
+            }
+        }
+    }
 </script>
 
 </html>
