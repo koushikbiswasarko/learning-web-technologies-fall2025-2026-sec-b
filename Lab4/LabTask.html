@@ -1,0 +1,271 @@
+<html>
+<head>
+    <title>Lab Task</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Input Type:</td>
+                    <td>
+                        <select id="inputType" name="input_type">
+                            <option value="text">Username</option>
+                            <option value="email">Email</option>
+                            <option value="radio">Gender</option>
+                            <option value="number">Date of Birth</option>
+                            <option value="select">Blood Group</option>
+                            <option value="checkbox">Degree</option>
+                        </select>
+                        <input type="button" id="add" value="Add">
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr id="Username">
+                    <td>Username:</td>
+                    <td>
+                        <input id="name" type="text" name="name">
+                    </td>
+                    <td>
+                        <div id="blankName" style="color:red;"></div>
+                        <div id="lengthName" style="color:red;"></div>
+                        <div id="startName" style="color:red;"></div>
+                        <div id="containtName" style="color:red;"></div>
+                    </td>
+                </tr>
+                <tr id="Email">
+                    <td>Email:</td>
+                    <td>
+                        <input id="email" type="email" name="email" required>
+                    </td>
+                    <td>
+                        <div id="blankEmail" style="color:red;"></div>
+                        <div id="invalidEmail" style="color:red;"></div>
+                    </td>
+                </tr>
+                    <tr id="Gender">
+                        <td>Gender:</td>
+                        <td>
+                            <input type="radio" name="gender" value="Male"> Male
+                            <input type="radio" name="gender" value="Female"> Female
+                            <input type="radio" name="gender" value="Other"> Other
+                        </td>
+                        <td>
+                            <div id="blankGender" style="color:red;"></div>
+                        </td>
+                    </tr>
+                    <tr id="DOB">
+                        <td>Date of Birth:</td>
+                        <td>
+                            <input id="day" type="number" name="dd"> / <input id="month" type="number" name="mm"> / <input id="year" type="number" name="yyyy"> <i>(dd/mm/yyyy)</i>
+                        </td>
+                        <td>
+                            <div id="blankDOB" style="color:red;"></div>
+                            <div id="invalidDOB" style="color:red;"></div>
+                        </td>
+                    </tr>
+                    <tr id="BloodGroup">
+                        <td>Blood Group:</td>
+                        <td>
+                            <select id="bloodGroup" name="blood_group">
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div id="blankBlood" style="color:red;"></div>
+                        </td>
+                    </tr>
+                    <tr id="Degree">
+                        <td>Degree:</td>
+                        <td>
+                            <input type="checkbox" id="SSC" name="degree" value="SSC">
+                            <label for="SSC">SSC</label>
+                            <input type="checkbox" id="HSC" name="degree" value="HSC">
+                            <label for="HSC">HSC</label>
+                            <input type="checkbox" id="BSc." name="degree" value="BSc.">
+                            <label for="BSc.">BSc.</label>
+                            <input type="checkbox" id="MSc." name="degree" value="MSc.">
+                            <label for="MSc.">MSc.</label>
+                        </td>
+                        <td>
+                            <div id="blankDegree" style="color:red;"></div>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" id="submit" value="Submit"></td>
+                    </tr>
+            </table>
+            <div id="outputName" style="margin-top:20px; color:blue;"></div>
+            <div id="outputEmail" style="color:blue;"></div>
+            <div id="outputDOB" style="color:blue;"></div>
+            <div id="outputGender" style="color:blue;"></div>
+            <div id="outputBlood" style="color:blue;"></div>
+            <div id="outputDegree" style="color:blue;"></div>
+
+        </fieldset>
+    </form>
+</body>
+
+<script>
+    
+    document.getElementById("Username").hidden = true;
+    document.getElementById("Email").hidden = true;
+    document.getElementById("Gender").hidden = true;
+    document.getElementById("DOB").hidden = true;
+    document.getElementById("BloodGroup").hidden = true;
+    document.getElementById("Degree").hidden = true;
+
+    document.getElementById("add").onclick = function() {
+        let type = document.getElementById("inputType").value;
+
+        if (type === "text") {
+            document.getElementById("Username").hidden = false;
+        }
+        if (type === "email") {
+            document.getElementById("Email").hidden = false;
+        }
+        if (type === "radio") {
+            document.getElementById("Gender").hidden = false;
+        }
+        if (type === "number") {
+            document.getElementById("DOB").hidden = false;
+        }
+        if (type === "select") {
+            document.getElementById("BloodGroup").hidden = false;
+        }
+        if (type === "checkbox") {
+            document.getElementById("Degree").hidden = false;
+        }
+    };
+
+    document.getElementById('submit').addEventListener('click', Error);
+
+    function Error() {
+    let name = document.getElementById("name").value.trim();
+    let blankName = document.getElementById("blankName");
+    let lengthName = document.getElementById("lengthName");
+    let startName = document.getElementById("startName");
+
+    blankName.innerHTML = "";
+    lengthName.innerHTML = "";
+    startName.innerHTML = "";
+
+    let firstChar = name.charCodeAt(0);
+    let namehasError = false;
+    let emailhasError = false;
+    let genderhasError = false;
+    let dobhasError = false;
+    let bloodhasError = false;
+    let degreehasError = false;
+
+    if (name === "") {
+        blankName.innerHTML = "Cannot be empty";
+        namehasError = true;
+    }
+
+    if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
+        startName.innerHTML = "Must start with a letter";
+        namehasError = true;
+    }
+
+    let email = document.getElementById("email").value.trim();
+    let emailType = document.getElementById("email");
+    let blankEmail = document.getElementById("blankEmail");
+    let invalidEmail = document.getElementById("invalidEmail");
+
+    blankEmail.innerHTML = "";
+    invalidEmail.innerHTML = "";
+
+    if (email === "") {
+        blankEmail.innerHTML = "Cannot be empty";
+        emailhasError = true;
+    }
+
+    if (!emailType.checkValidity()) {
+        invalidEmail.innerHTML = "Must be a valid email address (i.e anything@example.com)";
+        emailhasError = true;
+    }
+
+        let gender = document.querySelector('input[name="gender"]:checked');
+        let blankGender = document.getElementById("blankGender");
+
+        blankGender.innerHTML = "";
+
+        if (!gender) {
+            blankGender.innerHTML = "At least one of them has to be selected";
+            genderhasError = true;
+        }
+
+        let day = document.getElementById("day").value.trim();
+        let month = document.getElementById("month").value.trim();
+        let year = document.getElementById("year").value.trim();
+        let blankDOB = document.getElementById("blankDOB");
+        let invalidDOB = document.getElementById("invalidDOB");
+
+        blankDOB.innerHTML = "";
+        invalidDOB.innerHTML = "";
+
+        if (day === "" || month === "" || year === "") {
+            blankDOB.innerHTML = "Cannot be empty";
+            dobhasError = true;
+        }
+
+        if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2016)) {
+            invalidDOB.innerHTML = "Must be a valid number (dd: 1-31, mm: 1-12, yyyy: 1900-2016)";
+            dobhasError = true;
+        }
+
+        let blood = document.getElementById("bloodGroup");
+        let blankBlood = document.getElementById("blankBlood");
+        blankBlood.innerHTML = "";
+
+        if (!blood.value) {
+            blankBlood.innerHTML = "Must be selected";
+            bloodhasError = true;
+        }
+
+        let degree = document.querySelectorAll('input[name="degree"]:checked');
+        let blankDegree = document.getElementById("blankDegree");
+        let selectedDegrees = Array.from(degree).map(item => item.value);
+
+        blankDegree.innerHTML = "";
+
+        if (selectedDegrees.length === 0) {
+            blankDegree.innerHTML = "At least one of them has to be selected";
+            degreehasError = true;
+        }
+
+    if (!namehasError) {
+        document.getElementById('outputName').innerHTML = "Name: " + name;
+    }
+    if (!emailhasError) {
+        document.getElementById('outputEmail').innerHTML = "Email: " + email;
+    }
+    if (!genderhasError) {
+        document.getElementById('outputGender').innerHTML = "Gender: " + gender.value;
+    }
+    if (!dobhasError) {
+        document.getElementById('outputDOB').innerHTML = "Date of Birth: " + day + "/" + month + "/" + year;
+    }
+    if (!bloodhasError) {
+        document.getElementById('outputBlood').innerHTML = "Blood Group: " + blood.value;
+    }
+    if (!degreehasError) {
+        document.getElementById('outputDegree').innerHTML = "Degree: " + selectedDegrees.join(", ");
+    }
+
+}
+
+
+</script>
+
+</html>
