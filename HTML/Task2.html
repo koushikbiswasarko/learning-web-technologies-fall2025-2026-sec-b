@@ -1,0 +1,98 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>University Admission Form</title>
+</head>
+<body>
+    <form action="/submit_admission" method="post">
+        <h2>University Admission Form</h2>
+        
+        <fieldset>
+            <legend>Personal Info</legend>
+            <label>Name:</label>
+            <input id="name" type="text" required maxlength="50">
+
+            <br><br>
+            
+            <label>Email:</label>
+            <input id="email" type="email" required maxlength="50">
+            
+            <br><br>
+
+            <label>Phone:</label>
+            <input id="phone" type="tel" required maxlength="14">
+
+            <br><br>
+
+            <label>Date of Birth:</label>
+            <input id="date" type="date" required>
+
+            <br><br>
+
+            <label>Gender:</label>
+            <input name="Gender" type="Radio" value="male" required> Male 
+            <input name="Gender" type="Radio" value="female" required> Female
+            <input name="Gender" type="Radio" value="other" required> Other
+            
+            <br><br>
+            
+            <label>Interests:</label>
+            <input id="Interests" type="Checkbox" value="Sports"> Sports
+            <input id="Interests" type="Checkbox" value="Gameing"> Gaming
+            <input id="Interests" type="Checkbox" value="Reading"> Reading
+            <input id="Interests" type="Checkbox" value="Music"> Music
+            <input id="Interests" type="Checkbox" value="Arts"> Arts
+            <input id="Interests" type="Checkbox" value="Traveling"> Traveling
+            <input id="Interests" type="Checkbox" value="Coding"> Coding
+            
+            <br><br>
+
+        </fieldset>
+        
+        <br><br>
+
+        <fieldset>
+            <legend>Academic Info</legend>
+                <label>SSC:</label>
+                <input id="institution" type="text" required maxlength="100">
+                <label>Grade:</label>
+                <input id="grade" type="text" required maxlength="3">
+
+                <br><br>
+
+                <label>HSC:</label>
+                <input id="institution" type="text" required maxlength="100">
+                <label>Grade:</label>
+                <input id="grade" type="text" required maxlength="3">
+
+                <br><br>
+                
+                <label>Upload Transcript:</label>
+                <input id="transcript" type="file" required>
+        </fieldset>
+        
+        <br><br>
+
+        <fieldset>
+            <legend>Program Selection</legend>
+                <label>Choose a program:</label>
+                <select id="program" name="program" required>
+                    <option value="">--Select--</option>
+                    <option value="B.Sc. CSE">Bachelor of Science in Computer Science and Engineering</option>
+                    <option value="B.Sc. EEE">Bachelor of Science in Electrical and Electronic Engineering</option>
+                    <option value="BBA">Bachelor of Business Administration</option>
+                    <option value="LLB">Bachelor of Laws</option>
+                    <option value="M.Sc. CSE">Master of Science in Computer Science and Engineering</option>
+                    <option value="M.Sc. EEE">Master of Science in Electrical and Electronic Engineering</option>
+                    <option value="MBA">Master of Business Administration</option>
+                    <option value="LLM">Master of Laws</option>
+                </select>
+        </fieldset>
+        
+        <br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
