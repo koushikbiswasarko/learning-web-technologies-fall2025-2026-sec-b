@@ -1,0 +1,245 @@
+<html>
+    <head>
+        <title>Personal Portfolio Webpage</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Koushik Biswas Arko">
+        <meta name="description" content=" is a personal portfolio webpage for Koushik Biswas Arko.">
+        <meta name="keywords" content="Portfolio, Computer Science, Data Science, Robotics, IoT, Machine Learning, Graphic Design">
+    
+    </head>
+
+    <body>
+        <nav>
+            <a href="#about" id="about-link">About Me</a> |
+            <a href="#education" id="education-link">Educational Details</a> |
+            <a href="#contact" id="contact-link">Contact Me</a>
+        </nav>
+
+        <button id="theme-toggle">Change Theme</button>
+        
+        <br><br>
+
+        <header align="center">
+            <h1>
+                Koushik Biswas Arko
+                <br>___
+            </h1>
+            <h2>
+                Undergraduate Student, Department of Computer Science
+                <br>American International University-Bangladesh
+            </h2>
+            <hr>
+        </header>
+
+        <main>
+            <h2 align="center">Welcome to My Personal Portfolio</h2>
+
+            <h3 id="clock" align="center"></h3>
+
+            <h3 id="greeting" align="center"></h3>
+
+            <section id="about">
+                <h3>About Me</h3>
+                <p>I am an undergraduate student pursuing a Bachelor of Science in Computer Science and Engineering. I am involved in data science, robotics, IoT and machine learning research and have proficiency in graphic design. My focus is on developing innovative technological solutions.</p>
+
+                <table border="1" width="100%" cellpadding="10" cellspacing="0">
+                    <h3>Educational Details</h3>
+                    <tr align="center">
+                        <th>Institution</th>
+                        <th>Degree</th>
+                        <th>GPA/CGPA</th>
+                    </tr>
+                    <tr>
+                        <td>Kushtia Zilla School, Kushtia</td>
+                        <td>Secondary School Certificate (SSC)</td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>Notre Dame College, Dhaka</td>
+                        <td>Higher Secondary Certificate (HSC)</td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>American International University-Bangladesh</td>
+                        <td>Bachelor of Science in Computer Science and Engineering</td>
+                        <td>3.81 (ongoing)</td>
+                    </tr>
+                </table>
+        
+            </section>
+
+            <br><br>
+
+            <section id="projects">
+                <h3>Projects</h3>
+                <ul>
+                    <li>Capital Event Management System — Using Java</li>
+                    <li><a href="https://github.com/koushikbiswasarko/Computer_Graphics">Computer Graphics Project — Using C++</a></li>
+                    <li><a href="https://github.com/koushikbiswasarko/SmartParkX">SmartParkX: A Real-Time IoT-Based Smart Parking System with RFID Authentication, Infrared Slot Monitoring, and Web-Controlled Gate Automation — Using Arduino and ESPLink</a></li>
+                    <li><a href="https://github.com/koushikbiswasarko/Flood_Prediction">An Integrated Multisensor and LSTM-Based Deep Learning Storm Sewer System for Real-Time Flood Risk Prediction and Mitigation — Using Arduino, ESP and Python</a></li>
+                    <li><a href="https://github.com/koushikbiswasarko/SoilSyncX">SoilSyncX: An IoT-Enabled Smart Irrigation Prototype with Real-Time Web Monitoring for Sustainable Agriculture — Using Arduino, ESP and Python</a></li>
+                </ul>
+            </section>
+
+            <br><br>
+
+            <section id ="contact">
+                <h3>Contact Me</h3>
+                <form action="#contact" method="post">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required>
+                    <p id="startName" style="color:red;"></p>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required><br><br>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+                    <p id ="messageError" style="color:red;"></p>
+                    <br><br>
+                    <input id="submit-btn" type="submit" value="Submit">
+                </form>
+            </section>
+        </main>
+
+        <br><br>
+
+        <footer align="center">
+            <p>&copy; 2025 Koushik Biswas Arko. All rights reserved.</p>
+        </footer>
+    </body>
+
+    <style>
+        .dark-theme {
+            background-color: #070b1d;
+            color: #ffffff;
+        }
+
+        .dark-theme nav {
+            background-color: #070b1d;
+        }
+
+        .dark-theme a {
+            color: #bb86fc;
+        }
+
+        .dark-theme table,
+        .dark-theme th,
+        .dark-theme td {
+            border-color: #bb86fc;
+        }
+
+
+    </style>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        themeToggleBtn.addEventListener('click', changeTheme);
+
+        function changeTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        function getGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting;
+
+            if (hours > 5 && hours < 12) {
+                greeting = "Good Morning";
+            } else if (hours >= 12 && hours < 18) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+
+            return greeting;
+        }
+
+        const currentGreeting = getGreeting();
+        document.getElementById('greeting').textContent = currentGreeting;
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        document.getElementById('about-link').addEventListener('click', function() {
+            document.getElementById('projects').hidden = true;
+            document.getElementById('contact').hidden = true;
+            document.getElementById('about').hidden = false;
+        });
+
+        document.getElementById('education-link').addEventListener('click', function() {
+            document.getElementById('about').hidden = true;
+            document.getElementById('contact').hidden = true;
+            document.getElementById('projects').hidden = false;
+        });
+
+        document.getElementById('contact-link').addEventListener('click', function() {
+            document.getElementById('about').hidden = true;
+            document.getElementById('projects').hidden = true;
+            document.getElementById('contact').hidden = false;
+        });
+
+        let nameInput = document.getElementById("name");
+
+        let namehasError = false;
+        let messagehasError = false;
+
+        document.getElementById("submit-btn").addEventListener("click", function() {
+            let name = nameInput.value.trim();
+            let startName = document.getElementById("startName");
+            startName.innerHTML = "";
+
+            validateName();
+            validateMessage();
+
+            if (namehasError) {
+                event.preventDefault();
+            }
+
+            if (messagehasError) {
+                event.preventDefault();
+            }
+
+            if (!namehasError && !messagehasError) {
+                alert("Form submitted successfully!");
+            }
+        });
+
+        function validateName() {
+            let name = nameInput.value.trim();
+            let startName = document.getElementById("startName");
+            let firstChar = name.charCodeAt(0);
+            if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
+                startName.innerHTML = "Must start with a letter";
+                namehasError = true;
+            }
+        }
+
+        function validateMessage() {
+            let messageInput = document.getElementById("message");
+            let message = messageInput.value.trim();
+            let messageError = document.getElementById("messageError");
+            messageError.innerHTML = "";
+
+            if (message.length < 10) {
+                messageError.innerHTML = "Message must be at least 10 characters long";
+                messagehasError = true;
+            }
+        }
+        
+    </script>
+
+</html>
