@@ -7,22 +7,25 @@
         <fieldset>
             <table>
                 <tr>
-                    <td>Input Type:</td>
+                    <td>Enter Variable Name: <input id="VariableName" type="text"></td>
+                    <td>Select Type:</td>
                     <td>
                         <select id="inputType" name="input_type">
-                            <option value="text">Username</option>
+                            <option value="">Select input type</option>
+                            <option value="text">Text</option>
                             <option value="email">Email</option>
                             <option value="radio">Gender</option>
-                            <option value="number">Date of Birth</option>
+                            <option value="number">Date</option>
                             <option value="select">Blood Group</option>
                             <option value="checkbox">Degree</option>
                         </select>
                         <input type="button" id="add" value="Add">
                     </td>
+                    <td> <div id="VariableNameDisplay" style="color:red;"> </div> </td>
                 </tr>
                 <tr></tr>
-                <tr id="Username">
-                    <td>Username:</td>
+                <tr id="Text">
+                    <td> <div id="TextVariable" type="text"></div> </td>
                     <td>
                         <input id="name" type="text" name="name">
                     </td>
@@ -34,7 +37,7 @@
                     </td>
                 </tr>
                 <tr id="Email">
-                    <td>Email:</td>
+                    <td><div id="EmailVariable" type="email"></div></td>
                     <td>
                         <input id="email" type="email" name="email" required>
                     </td>
@@ -43,8 +46,8 @@
                         <div id="invalidEmail" style="color:red;"></div>
                     </td>
                 </tr>
-                    <tr id="Gender">
-                        <td>Gender:</td>
+                    <tr id="Radio">
+                        <td><div id="RadioVariable"></div></td>
                         <td>
                             <input type="radio" name="gender" value="Male"> Male
                             <input type="radio" name="gender" value="Female"> Female
@@ -54,8 +57,8 @@
                             <div id="blankGender" style="color:red;"></div>
                         </td>
                     </tr>
-                    <tr id="DOB">
-                        <td>Date of Birth:</td>
+                    <tr id="Number">
+                        <td><div id="NumberVariable" type="number"></div></td>
                         <td>
                             <input id="day" type="number" name="dd"> / <input id="month" type="number" name="mm"> / <input id="year" type="number" name="yyyy"> <i>(dd/mm/yyyy)</i>
                         </td>
@@ -64,8 +67,8 @@
                             <div id="invalidDOB" style="color:red;"></div>
                         </td>
                     </tr>
-                    <tr id="BloodGroup">
-                        <td>Blood Group:</td>
+                    <tr id="Drop-down">
+                        <td><div id="Drop-downVariable" type="dropdown"></div></td>
                         <td>
                             <select id="bloodGroup" name="blood_group">
                                 <option value="">Select Blood Group</option>
@@ -83,8 +86,8 @@
                             <div id="blankBlood" style="color:red;"></div>
                         </td>
                     </tr>
-                    <tr id="Degree">
-                        <td>Degree:</td>
+                    <tr id="Checkbox">
+                        <td><div id="CheckboxVariable" type="checkbox"></div></td>
                         <td>
                             <input type="checkbox" id="SSC" name="degree" value="SSC">
                             <label for="SSC">SSC</label>
@@ -106,8 +109,8 @@
             </table>
             <div id="outputName" style="margin-top:20px; color:blue;"></div>
             <div id="outputEmail" style="color:blue;"></div>
-            <div id="outputDOB" style="color:blue;"></div>
             <div id="outputGender" style="color:blue;"></div>
+            <div id="outputDOB" style="color:blue;"></div>
             <div id="outputBlood" style="color:blue;"></div>
             <div id="outputDegree" style="color:blue;"></div>
 
@@ -116,37 +119,64 @@
 </body>
 
 <script>
-    document.getElementById("Username").hidden = true;
+    document.getElementById("Text").hidden = true;
     document.getElementById("Email").hidden = true;
-    document.getElementById("Gender").hidden = true;
-    document.getElementById("DOB").hidden = true;
-    document.getElementById("BloodGroup").hidden = true;
-    document.getElementById("Degree").hidden = true;
+    document.getElementById("Radio").hidden = true;
+    document.getElementById("Number").hidden = true;
+    document.getElementById("Drop-down").hidden = true;
+    document.getElementById("Checkbox").hidden = true;
+
 
     document.getElementById("add").onclick = function() {
-        let type = document.getElementById("inputType").value;
 
-        if (type === "text") {
-            document.getElementById("Username").hidden = false;
+            let varName = document.getElementById("VariableName").value.trim();
+            let VariableNameDisplay = document.getElementById("VariableNameDisplay");
+
+        if (varName === "") {
+            VariableNameDisplay.innerHTML = "Cannot be empty";
         }
-        if (type === "email") {
-            document.getElementById("Email").hidden = false;
-        }
-        if (type === "radio") {
-            document.getElementById("Gender").hidden = false;
-        }
-        if (type === "number") {
-            document.getElementById("DOB").hidden = false;
-        }
-        if (type === "select") {
-            document.getElementById("BloodGroup").hidden = false;
-        }
-        if (type === "checkbox") {
-            document.getElementById("Degree").hidden = false;
+
+        else {
+            
+            VariableNameDisplay.innerHTML = ""; 
+            let type = document.getElementById("inputType").value;
+
+            if (type === "") {
+                VariableNameDisplay.innerHTML = "Please select a type";
+                return;
+            }
+
+            if (type === "text") {
+                document.getElementById("TextVariable").innerHTML = varName + ": ";       
+                document.getElementById("Text").hidden = false;
+            }
+
+            if (type === "email") {
+                document.getElementById("EmailVariable").innerHTML = varName + ": ";
+                document.getElementById("Email").hidden = false;
+            }
+            if (type === "radio") {
+                document.getElementById("RadioVariable").innerHTML = varName + ": ";
+                document.getElementById("Radio").hidden = false;
+            }
+            if (type === "number") {
+                document.getElementById("NumberVariable").innerHTML = varName + ": ";
+                document.getElementById("Number").hidden = false;
+            }
+            if (type === "select") {
+                document.getElementById("Drop-downVariable").innerHTML = varName + ": ";
+                document.getElementById("Drop-down").hidden = false;
+            }
+            if (type === "checkbox") {
+                document.getElementById("CheckboxVariable").innerHTML = varName + ": ";
+                document.getElementById("Checkbox").hidden = false;
+            }
+
         }
     };
 
     document.getElementById('submit').addEventListener('click', Error);
+
 
     function Error() {
 
@@ -179,7 +209,12 @@
         let blood = document.getElementById("bloodGroup");
         let selectedDegrees = [];
 
-        if (!document.getElementById("Username").hidden) {
+        if(document.getElementById("Text").hidden && document.getElementById("Email").hidden && document.getElementById("Radio").hidden && document.getElementById("Number").hidden && document.getElementById("Drop-down").hidden && document.getElementById("Checkbox").hidden) {
+            alert("No input to submit!");
+            return;
+        }
+
+        if (!document.getElementById("Text").hidden) {
             name = document.getElementById("name").value.trim();
             let blankName = document.getElementById("blankName");
             let lengthName = document.getElementById("lengthName");
@@ -227,7 +262,7 @@
             if (emailhasError) anyError = true;
         }
 
-        if (!document.getElementById("Gender").hidden) {
+        if (!document.getElementById("Radio").hidden) {
             gender = document.querySelector('input[name="gender"]:checked');
             let blankGender = document.getElementById("blankGender");
             blankGender.innerHTML = "";
@@ -242,7 +277,7 @@
             if (genderhasError) anyError = true;
         }
 
-        if (!document.getElementById("DOB").hidden) {
+        if (!document.getElementById("Number").hidden) {
             day = document.getElementById("day").value.trim();
             month = document.getElementById("month").value.trim();
             year = document.getElementById("year").value.trim();
@@ -265,7 +300,7 @@
             if (dobhasError) anyError = true;
         }
 
-        if (!document.getElementById("BloodGroup").hidden) {
+        if (!document.getElementById("Drop-down").hidden) {
             let blankBlood = document.getElementById("blankBlood");
             blankBlood.innerHTML = "";
 
@@ -279,7 +314,7 @@
             if (bloodhasError) anyError = true;
         }
 
-        if (!document.getElementById("Degree").hidden) {
+        if (!document.getElementById("Checkbox").hidden) {
             let degree = document.querySelectorAll('input[name="degree"]:checked');
             let blankDegree = document.getElementById("blankDegree");
             blankDegree.innerHTML = "";
@@ -300,23 +335,23 @@
         }
 
         if (!anyError) {
-            if (!document.getElementById("Username").hidden) {
-                document.getElementById('outputName').innerHTML = "Name: " + name;
+            if (!document.getElementById("Text").hidden) {
+                document.getElementById('outputName').innerHTML = name;
             }
             if (!document.getElementById("Email").hidden) {
-                document.getElementById('outputEmail').innerHTML = "Email: " + email;
+                document.getElementById('outputEmail').innerHTML = email;
             }
-            if (!document.getElementById("Gender").hidden) {
-                document.getElementById('outputGender').innerHTML = "Gender: " + gender.value;
+            if (!document.getElementById("Radio").hidden) {
+                document.getElementById('outputGender').innerHTML = gender.value;
             }
-            if (!document.getElementById("DOB").hidden) {
-                document.getElementById('outputDOB').innerHTML = "Date of Birth: " + day + "/" + month + "/" + year;
+            if (!document.getElementById("Number").hidden) {
+                document.getElementById('outputDOB').innerHTML = day + "/" + month + "/" + year;
             }
-            if (!document.getElementById("BloodGroup").hidden) {
-                document.getElementById('outputBlood').innerHTML = "Blood Group: " + blood.value;
+            if (!document.getElementById("Drop-down").hidden) {
+                document.getElementById('outputBlood').innerHTML = blood.value;
             }
-            if (!document.getElementById("Degree").hidden) {
-                document.getElementById('outputDegree').innerHTML = "Degree: " + selectedDegrees.join(", ");
+            if (!document.getElementById("Checkbox").hidden) {
+                document.getElementById('outputDegree').innerHTML = selectedDegrees.join(", ");
             }
         }
     }
